@@ -70,7 +70,7 @@ To run this project locally, follow these steps:
 
 6. **Access the chatbot**:
 
-    Open your browser and go to `http://127.0.0.1:7013` to interact with the chatbot.
+    Open your browser and go to `http://127.0.0.1:5000` to interact with the chatbot.
 
 ## File Details
 
