@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced AI Chat Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        async function sendMessage() {
+            const userMessage = document.getElementById('message').value;
+            const chatHistory = document.getElementById('chatHistory').value;
+
+            if (!userMessage) {
+                return;
+            }
+
+            // Add user message to chat window
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.innerHTML += `<div class="message user-message">You: ${userMessage}</div>`;
+
+            // Clear the input field
+            document.getElementById('message').value = "";
+
+            // Prepare payload for the API
+            const payload = {
+                message: userMessage,
+                history: chatHistory
+            };
+
+            // Send POST request to the Flask backend
+            const response = await fetch("/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            // Append chatbot response to chat window
+            chatWindow.innerHTML += `<div class="message bot-message">Bot: ${data.response}</div>`;
+            document.getElementById('chatHistory').value = data.history;
+
+            // Scroll to the bottom
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+    </script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <h2>Real Time AI Chat Assistant</h2>
+        </div>
+        <div id="chatWindow" class="chat-window"></div>
+        <textarea id="chatHistory" hidden></textarea>
+
+        <div class="input-container">
+            <input type="text" id="message" placeholder="Type your message...">
+            <button onclick="sendMessage()">
+                <span>Send</span>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>
