@@ -3,6 +3,10 @@
 
 This project demonstrates an advanced AI chatbot built using **Flask**, **LangChain's LLaMA**, and **Tavily Search API**. It is designed to provide both real-time information from the web and contextual conversational answers through a large language model. The chatbot first uses Tavily to search for real-time data. If no valid result is found, it falls back to the LLaMA model for a response.
 
+## Screenshot
+
+![Screenshot 2024-09-19 105931](https://github.com/user-attachments/assets/5885677e-3910-4992-af6c-db59d52cf4ae)
+
 ## Features
 
 - **Real-Time Web Search**: Powered by the Tavily Search API, allowing the bot to fetch up-to-date information from the web.
